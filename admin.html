@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>แอดมิน · มาร์คโรงงานชุดเด็ก</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<style>
+/* VOICE: เงียบ สะอาด มั่นใจ แบบร้านแบรนด์เสื้อผ้า — ให้ภาพชุดพูดเอง
+   IDEA: หน้าแคตตาล็อกแฟชั่น + ป้ายแขวนสินค้า (hang tag) ที่บอกว่าขายยังไง
+   PICTURE: รูปชุดเต็มกรอบ 3:4 ไม่มีกรอบโค้ง; อีเวนต์คริสต์มาสเป็นแผงเขียวเข้มเต็มความกว้างพร้อมหิมะ
+   COLOUR/TYPE: ขาว-ดำเป็นหลัก; ธีมคริสต์มาส เขียวสน แดงเบอร์รี่ ทองเล็กน้อย / IBM Plex Sans Thai + Playfair ตัวเอียงสำหรับหัวอีเวนต์
+   LAYOUT: คอลัมน์เดียวแบบมือถือ กว้างสุด 520px ตะกร้า/ปุ่มติดล่าง */
+:root{--bg:#fff;--ink:#141414;--mut:#767676;--line:#e6e6e6;--acc:#141414;--accInk:#fff;--soft:#f5f3ef;--hero:#f1ede6;--heroInk:#141414;--red:#b3122e;--gold:#b8912c;--ok:#1f7a4d}
+body.xmas{--bg:#fbf8f3;--acc:#0f3d2e;--soft:#f3eee4;--hero:#0f3d2e;--heroInk:#f7efe0}
+*{box-sizing:border-box;margin:0;min-width:0}
+html{background:#ece8e1}
+body{font-family:'IBM Plex Sans Thai',sans-serif;font-weight:400;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.55;max-width:520px;margin:0 auto;min-height:100vh;padding-bottom:190px;overflow-x:clip}
+button{font:inherit;color:inherit;cursor:pointer}
+.top{position:sticky;top:0;z-index:15;background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:14px 16px}
+.brand{font-weight:600;letter-spacing:.02em;font-size:17px;border:0;background:none;padding:0}
+.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;display:grid;grid-template-columns:repeat(var(--tabn,3),1fr);background:var(--bg);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);z-index:16}
+.tabs button{border:0;background:none;min-height:72px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:16px;font-weight:500;color:var(--mut);position:relative}
+.tabs svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tabs button.on{color:var(--acc)}
+.tabs button.on:before{content:'';position:absolute;top:0;left:22%;right:22%;height:3px;background:var(--acc)}
+.cnt{position:absolute;top:8px;left:calc(50% + 8px);min-width:22px;height:22px;line-height:22px;border-radius:99px;background:var(--red);color:#fff;font-size:13px;text-align:center;padding:0 6px}
+.view{display:none}.view.on{display:block}
+.pad{padding:0 16px}
+.lbl{font-size:12.5px;color:var(--mut);letter-spacing:.04em;margin-bottom:6px}
+h2{font-size:20px;font-weight:500;line-height:1.2}
+.hr{height:1px;background:var(--line);margin:22px 0}
+/* hero */
+.hero{background:var(--hero);color:var(--heroInk);position:relative;overflow:hidden;padding:28px 20px 22px}
+.hero h1{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:clamp(34px,10vw,46px);line-height:1.02;margin:6px 0 4px}
+.hero .th{font-size:20px;font-weight:500}
+.hero p{opacity:.85;font-size:14.5px;max-width:30em;margin-top:6px}
+.hero .art{position:absolute;right:-18px;top:6px;width:170px;height:200px;opacity:.95;pointer-events:none}
+.hero .txt{position:relative;max-width:62%}
+.snow{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(2px 2px at 20% 30%,#fff9 60%,transparent 61%),radial-gradient(1.6px 1.6px at 70% 20%,#fff8 60%,transparent 61%),radial-gradient(2.4px 2.4px at 40% 70%,#fff7 60%,transparent 61%),radial-gradient(1.4px 1.4px at 85% 60%,#fff9 60%,transparent 61%),radial-gradient(2px 2px at 10% 85%,#fff6 60%,transparent 61%);background-size:180px 180px;animation:fall 14s linear infinite}
+@keyframes fall{to{background-position:0 180px,0 180px,0 180px,0 180px,0 180px}}
+@media(prefers-reduced-motion:reduce){.snow{animation:none}}
+.strip{display:flex;gap:12px;overflow-x:auto;margin-top:18px;padding-bottom:4px;position:relative}
+.sw{flex:none;width:76px;text-align:center;font-size:12px;border:0;background:none;padding:0}
+.sw i{display:block;width:76px;height:76px;border-radius:50%;background:#fff3 center/cover;border:2px solid #fff6;margin-bottom:6px}
+.plain-hero{background:var(--hero);padding:26px 20px}
+.plain-hero h1{font-size:28px;font-weight:500;line-height:1.15}
+/* grid */
+.bar2{display:flex;justify-content:space-between;align-items:end;padding:22px 16px 12px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--bg);padding:9px 18px;border-radius:99px;font-size:16px;min-height:44px}
+.chip.on{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+.chip small{display:block;font-size:13px;opacity:.8;line-height:1.2}
+#ships .chip{text-align:left;line-height:1.3;padding:8px 16px}
+body.xmas .chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 10px;padding:0 10px}
+.item{border:0;background:none;padding:0;text-align:left;display:block;width:100%;align-self:start}
+.ph{aspect-ratio:3/4;background:var(--soft) center/cover no-repeat;position:relative;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:300;color:var(--mut)}
+.tag{position:absolute;top:8px;left:8px;background:var(--bg);color:var(--ink);font-size:11.5px;padding:2px 8px;font-weight:500}
+.tag.x{background:var(--red);color:#fff;left:auto;right:8px}
+.item .nm{font-size:13px;color:var(--mut);margin-top:8px}
+.item .ds{font-size:14.5px;line-height:1.35;margin-top:2px}
+.item .pr{font-size:14px;font-weight:500;margin-top:4px}
+/* info blocks */
+.facts{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);margin:28px 16px 0}
+.facts div{padding:14px 0;border-bottom:1px solid var(--line);font-size:14px}
+.facts div:nth-child(odd){padding-right:10px}
+.facts b{display:block;font-size:17px;font-weight:500}
+.szg{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px}
+.szg div{background:var(--soft);padding:14px;font-size:14px}
+.szg b{display:block;font-size:16px;font-weight:500}
+/* product */
+.back{border:0;background:none;padding:14px 16px;font-size:17px;min-height:52px}
+.pimg{aspect-ratio:3/4;background:var(--soft) center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:72px;font-weight:300;color:var(--mut)}
+.ptitle{padding:18px 16px 0}
+.ptitle h2{font-size:26px}
+.ptitle .ds{color:var(--mut);margin-top:2px}
+.ptab{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}
+.ptab th,.ptab td{border-bottom:1px solid var(--line);padding:8px 4px;text-align:right;white-space:nowrap}
+.ptab th:first-child,.ptab td:first-child{text-align:left}
+.ptab th{font-weight:400;color:var(--mut);font-size:12.5px}
+.story{padding:0 16px}
+.story section{padding:14px 0;border-bottom:1px solid var(--line)}
+.story h3{font-size:14px;font-weight:600;margin-bottom:4px}
+.story p{font-size:15px;color:#333}
+body.xmas .story p{color:#2b2b2b}
+.pick{padding:0 16px}
+.pgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.pp{border:0;background:none;padding:0;font-size:12px;line-height:1.3;text-align:left}
+.pp i{display:block;aspect-ratio:1;background:var(--soft) center/cover;outline:1px solid var(--line);outline-offset:-1px;margin-bottom:5px;position:relative}
+.pp.on i{outline:2px solid var(--ink);outline-offset:2px}
+.pp em{position:absolute;bottom:4px;left:4px;font-style:normal;font-size:10px;background:var(--red);color:#fff;padding:0 5px}
+.tagcard{background:var(--soft);padding:14px 16px;margin-top:12px;position:relative}
+.tagcard:before{content:'';position:absolute;top:14px;right:14px;width:10px;height:10px;border-radius:50%;border:1.5px solid var(--mut)}
+.tagcard h4{font-size:15px;font-weight:600;margin-bottom:6px}
+.tagcard dl{display:grid;grid-template-columns:5.5em 1fr;gap:4px 10px;font-size:14.5px}
+.tagcard dt{color:var(--mut)}
+.sizes{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sz{border:1px solid var(--line);background:var(--bg);padding:12px;text-align:left;min-height:44px}
+.sz b{display:block;font-weight:500}
+.sz span{font-size:12.5px;color:var(--mut);display:block;line-height:1.35}
+.sz.on{border:2px solid var(--ink);padding:11px}
+.qty{display:flex;align-items:center;border:1px solid var(--line);width:max-content}
+.qty button{width:60px;height:56px;border:0;background:none;font-size:22px}
+.qty input{width:96px;height:56px;border:0;border-inline:1px solid var(--line);text-align:center;font:inherit;font-size:19px;font-weight:500;background:var(--bg);color:var(--ink)}
+.calc{margin-top:10px;font-size:14.5px}
+.err{color:var(--red);font-size:14px;margin:4px 0}
+/* bag & forms */
+.line{display:grid;grid-template-columns:64px 1fr auto;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);align-items:start}
+.line i{display:block;aspect-ratio:3/4;background:var(--soft) center/cover}
+.line .del{border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:15px;padding:6px 16px;margin-top:8px;min-height:40px}
+.muted{color:var(--mut);font-size:14px}
+label{display:block;font-size:13.5px;margin:14px 0 6px;color:var(--mut)}
+input,textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:0;font:inherit;font-size:16px;color:var(--ink);background:var(--bg)}
+input:focus,textarea:focus,button:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+.sum .row{display:flex;justify-content:space-between;padding:7px 0;font-size:15px}
+.sum .row b{font-weight:500;white-space:nowrap}
+.sum .tot{border-top:1px solid var(--ink);margin-top:6px;padding-top:12px;font-size:17px}
+.big{font-size:30px;font-weight:500;line-height:1.1}
+.btn{display:block;width:100%;padding:16px;border:0;background:var(--acc);color:var(--accInk);font-weight:600;font-size:18px;min-height:58px}
+.btn:disabled{background:#c9c6c0;color:#fff}
+.btn.ghost{background:var(--bg);color:var(--ink);border:1px solid var(--ink)}
+.dock{position:fixed;bottom:calc(73px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:var(--bg);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));z-index:14}
+.dock .hint{font-size:13px;color:var(--mut);margin-bottom:6px;display:flex;justify-content:space-between}
+.tier{display:inline-block;padding:3px 12px;border:1px solid var(--ink);font-size:13px;font-weight:500}
+.prog{height:4px;background:var(--line);margin:14px 0 8px}.prog i{display:block;height:100%;background:var(--acc)}
+.st{font-size:12.5px;padding:2px 8px;background:var(--soft);white-space:nowrap}
+#loader{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;z-index:50;text-align:center;padding:24px}
+.hide{display:none!important}
+.card{border:1px solid var(--line);background:var(--bg);padding:14px;margin-bottom:10px;width:100%;text-align:left;display:block}
+.card.u{border-left:4px solid var(--red)}
+.card .t{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.card .h{font-size:14px;color:var(--mut);margin-top:4px}.card.u .h{color:var(--red);font-weight:500}
+.grp{font-size:15px;font-weight:600;margin:20px 0 8px}
+.subtabs{display:flex;gap:6px;overflow-x:auto;padding:14px 16px 4px}
+.subtabs button{flex:none;border:1px solid var(--line);background:var(--bg);padding:10px 16px;font-size:16px;min-height:46px}
+.subtabs button.on{background:var(--acc);border-color:var(--acc);color:var(--accInk)}
+.msg{background:var(--soft);padding:12px;font-size:15px;white-space:pre-wrap;margin:8px 0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+select{width:100%;padding:12px;border:1px solid var(--line);font:inherit;font-size:16px;background:var(--bg);color:var(--ink)}
+.ok{color:var(--ok);font-size:14px;margin:6px 0}
+.pv{background:#141414;color:#fff;font-size:12.5px;text-align:center;padding:6px 10px}
+
+body{padding-bottom:40px}
+.top{justify-content:space-between}
+.subtabs{position:sticky;top:53px;z-index:14;background:var(--bg);border-bottom:1px solid var(--line);padding-bottom:12px}
+</style>
+</head>
+<body>
+<div id="loader"><div class="big" style="font-weight:300">แอดมิน</div><div id="loadmsg" class="muted">กำลังโหลด...</div></div>
+
+<div class="top"><span class="brand">แอดมิน · มาร์คโรงงานชุดเด็ก</span><button class="chip" onclick="loadAdmin()">รีเฟรช</button></div>
+<div class="subtabs" id="admTabs"></div>
+<div class="pad" id="admBody"></div>
+
+<script>
+{
+/* ===== ใส่ 2 ค่านี้ก่อนอัปโหลด ===== */
+const LIFF_ID = '2012709823-p74GFmea';
+const API = 'https://script.google.com/macros/s/AKfycby7lJWAsnKhCoggWBT0CkXqn0bPhjOFqtbUSvlyTug-G7IGjTh7FyqNFgGX1cgMW-fCWw/exec';
+/* ================================= */
+let ID = null, ADM = { tab: 'today', status: '', no: '' };
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmt = n => Number(n || 0).toLocaleString('th-TH');
+const bgUrl = u => u ? `background-image:url('${String(u).replace(/['"()\s<>]/g, c => '%' + c.charCodeAt(0).toString(16).padStart(2, '0'))}')` : '';
+async function api(body) {
+  const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) });
+  return r.json();
+}
+function openBill(url) {
+  try { if (window.liff && liff.isInClient()) { liff.openWindow({ url: url, external: true }); return; } } catch (e) { }
+  window.open(url, '_blank');
+}
+/* ---- หน้าแอดมิน ---- */
+const ADM_TABS = [['today', 'งานวันนี้'], ['orders', 'ออเดอร์'], ['codes', 'โค้ดส่วนลด'], ['prints', 'ลายผ้า']];
+const NEXT = { 'ลูกค้าสั่งแล้ว': 'ได้มัดจำแล้ว', 'ได้มัดจำแล้ว': 'ผลิตเสร็จ', 'ผลิตเสร็จ': 'จ่ายครบแล้ว', 'จ่ายครบแล้ว': 'ส่งแล้ว' };
+const NEXT_LABEL = { 'ได้มัดจำแล้ว': 'ได้รับมัดจำแล้ว', 'ผลิตเสร็จ': 'ผลิตเสร็จแล้ว', 'จ่ายครบแล้ว': 'ได้รับยอดที่เหลือครบแล้ว', 'ส่งแล้ว': 'ส่งของแล้ว' };
+let admCache = {}, admConfirm = '';
+async function adm(op, extra) {
+  const res = await api(Object.assign({ action: 'admin', idToken: ID, op: op }, extra || {}));
+  if (!res.ok) throw new Error(res.error || 'ทำไม่สำเร็จ');
+  return res;
+}
+function renderAdmTabs() {
+  $('admTabs').innerHTML = ADM_TABS.map(t => `<button class="${ADM.tab === t[0] && !ADM.no ? 'on' : ''}" onclick="admTab('${t[0]}')">${t[1]}</button>`).join('');
+}
+function admTab(t) { ADM.tab = t; ADM.no = ''; renderAdmTabs(); loadAdmin(); }
+function admErr(e) { $('admBody').innerHTML = `<p class="err" style="margin-top:16px">${esc(e.message || e)}</p>`; }
+function admCard(o) {
+  return `<button class="card${o.urgent ? ' u' : ''}" onclick="admOpen('${esc(o.no)}')">
+    <div class="t"><b style="font-weight:600">${esc(o.shop)}</b><span class="st">${esc(o.status)}</span></div>
+    <div class="muted">${esc(o.no)} · ${fmt(o.pieces)} ตัว · ${fmt(o.net)} บาท</div>${o.hint ? `<div class="h">${esc(o.hint)}</div>` : ''}</button>`;
+}
+async function loadAdmin() {
+  const box = $('admBody');
+  if (ADM.no) return admOpen(ADM.no);
+  box.innerHTML = '<p class="muted" style="margin-top:16px">กำลังโหลด...</p>';
+  try {
+    if (ADM.tab === 'today') {
+      const g = (await adm('today')).groups;
+      const sec = [['toShip', 'จ่ายครบ รอส่งของ'], ['due', 'ใกล้ครบกำหนดผลิต'], ['ready', 'ผลิตเสร็จ รอเก็บยอดที่เหลือ'], ['follow', 'รอมัดจำ · ตามลูกค้า'], ['after', 'ส่งแล้วครบ 7 วัน · ชวนสั่งซ้ำ']];
+      const n = sec.reduce((a, s) => a + g[s[0]].length, 0);
+      box.innerHTML = n ? sec.filter(s => g[s[0]].length).map(s => `<div class="grp">${s[1]} (${g[s[0]].length})</div>${g[s[0]].map(admCard).join('')}`).join('')
+        : '<p class="muted" style="margin-top:16px">วันนี้ไม่มีงานค้างครับ</p>';
+    } else if (ADM.tab === 'orders') {
+      const res = await adm('orders', { status: ADM.status });
+      const total = Object.keys(res.counts).reduce((a, k) => a + res.counts[k], 0);
+      box.innerHTML = `<div class="chips" style="margin:12px 0">${[['', 'ทั้งหมด (' + total + ')']].concat(res.statuses.map(s => [s, s + ' (' + res.counts[s] + ')'])).map(s =>
+        `<button class="chip${ADM.status === s[0] ? ' on' : ''}" onclick="admFilter('${s[0]}')">${esc(s[1])}</button>`).join('')}</div>`
+        + (res.orders.length ? res.orders.map(admCard).join('') : '<p class="muted">ไม่มีออเดอร์</p>');
+    } else if (ADM.tab === 'codes') {
+      const res = await adm('codes'); admCache.codes = res.codes; admCache.types = res.types;
+      box.innerHTML = `<div class="grp">โค้ดทั้งหมด</div>` + (res.codes.length ? res.codes.map(c => `<div class="card">
+        <div class="t"><b style="font-weight:600;font-size:18px">${esc(c.code)}</b><span class="st">${c.active ? 'เปิดอยู่' : 'ปิดอยู่'}</span></div>
+        <div class="muted">${esc(codeText(c))}</div>
+        <div class="muted">ใช้ไป ${c.used}${c.limit ? '/' + c.limit : ''} ครั้ง${c.perShop ? ' · ร้านละ ' + c.perShop + ' ครั้ง' : ''}${c.until ? ' · ถึง ' + esc(c.until) : ''}</div>
+        <div class="row2" style="margin-top:10px"><button class="btn ghost" onclick="admToggleCode('${esc(c.code)}')">${c.active ? 'ปิดโค้ด' : 'เปิดโค้ด'}</button><button class="btn ghost" onclick="admEditCode('${esc(c.code)}')">แก้ไข</button></div></div>`).join('') : '<p class="muted">ยังไม่มีโค้ด</p>')
+        + `<div class="grp" id="codeFormTop">สร้าง / แก้โค้ด</div>${codeForm({})}`;
+    } else if (ADM.tab === 'prints') {
+      const res = await adm('prints');
+      box.innerHTML = `<p class="muted" style="margin:12px 0">กดเพื่อเปิด/ปิดลายที่มีผ้าอยู่จริง ลายที่ปิด ลูกค้าจะมองไม่เห็น</p>` + res.prints.map(p => `<div class="card" style="display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center">
+        <i style="display:block;width:56px;height:56px;background:var(--soft) center/cover;${bgUrl(p.img)}"></i>
+        <div><b style="font-weight:600">${esc(p.name)}</b><div class="muted">ทรง ${esc(p.styles || 'ทั้งหมด')}${p.col ? ' · ' + esc(p.col) : ''}</div></div>
+        <button class="btn ${p.on ? '' : 'ghost'}" style="width:auto;padding:0 16px" onclick="admTogglePrint(${p.row})">${p.on ? 'มีผ้า' : 'ผ้าหมด'}</button></div>`).join('');
+    }
+  } catch (e) { admErr(e); }
+}
+function admFilter(s) { ADM.status = s; loadAdmin(); }
+
+function codeText(c) {
+  const v = c.type === 'ลดบาท' ? 'ลด ' + fmt(c.value) + ' บาท' : c.type === 'ลด%' ? 'ลด ' + c.value + '%' + (c.cap ? ' (สูงสุด ' + fmt(c.cap) + ' บาท)' : '') : c.type === 'ลดต่อตัว' ? 'ลดตัวละ ' + c.value + ' บาท' : 'ส่งฟรี';
+  return v + (c.minPieces ? ' · สั่ง ' + c.minPieces + ' ตัวขึ้นไป' : '') + (c.minSubtotal ? ' · ค่าสินค้า ' + fmt(c.minSubtotal) + ' บาทขึ้นไป' : '') + (c.note ? ' · ' + c.note : '');
+}
+function codeForm(c) {
+  const types = admCache.types || ['ลดบาท', 'ลด%', 'ลดต่อตัว', 'ส่งฟรี'];
+  return `<div class="card" id="codeForm">
+    <label>โค้ด (ภาษาอังกฤษ/ตัวเลข)</label><input id="cCode" value="${esc(c.code || '')}" placeholder="เช่น XMAS2026" autocapitalize="characters">
+    <label>ประเภท</label><select id="cType">${types.map(x => `<option${c.type === x ? ' selected' : ''}>${x}</option>`).join('')}</select>
+    <div class="row2"><div><label>มูลค่า</label><input id="cVal" type="number" inputmode="numeric" value="${esc(c.value || '')}"></div>
+      <div><label>ลดสูงสุด (บาท)</label><input id="cCap" type="number" inputmode="numeric" value="${esc(c.cap || '')}"></div></div>
+    <div class="row2"><div><label>สั่งขั้นต่ำ (ตัว)</label><input id="cMinP" type="number" inputmode="numeric" value="${esc(c.minPieces || '')}"></div>
+      <div><label>ค่าสินค้าขั้นต่ำ</label><input id="cMinS" type="number" inputmode="numeric" value="${esc(c.minSubtotal || '')}"></div></div>
+    <div class="row2"><div><label>สิทธิ์ทั้งหมด</label><input id="cLim" type="number" inputmode="numeric" value="${esc(c.limit || '')}" placeholder="ว่าง = ไม่จำกัด"></div>
+      <div><label>สิทธิ์ต่อร้าน</label><input id="cPer" type="number" inputmode="numeric" value="${esc(c.perShop || '')}" placeholder="ว่าง = ไม่จำกัด"></div></div>
+    <label>ใช้ได้ถึงวันที่</label><input id="cUntil" type="date" value="${esc(c.until || '')}">
+    <label>หมายเหตุ (ลูกค้าเห็น)</label><input id="cNote" maxlength="120" value="${esc(c.note || '')}">
+    <div id="cMsg"></div>
+    <button class="btn" style="margin-top:14px" onclick="admSaveCode()">บันทึกโค้ด</button></div>`;
+}
+function admEditCode(code) {
+  const c = (admCache.codes || []).find(x => x.code === code); if (!c) return;
+  $('codeForm').outerHTML = codeForm(c); $('codeFormTop').scrollIntoView({ behavior: 'smooth' });
+}
+async function admSaveCode() {
+  const c = { code: $('cCode').value, type: $('cType').value, value: $('cVal').value, cap: $('cCap').value, minPieces: $('cMinP').value,
+    minSubtotal: $('cMinS').value, limit: $('cLim').value, perShop: $('cPer').value, until: $('cUntil').value, note: $('cNote').value, active: true };
+  try { await adm('saveCode', { c: c }); loadAdmin(); } catch (e) { $('cMsg').innerHTML = `<p class="err">${esc(e.message)}</p>`; }
+}
+async function admToggleCode(code) { try { await adm('toggleCode', { code: code }); loadAdmin(); } catch (e) { admErr(e); } }
+async function admTogglePrint(row) { try { await adm('togglePrint', { row: row }); loadAdmin(); } catch (e) { admErr(e); } }
+
+function msgFor(o, bill) {
+  const b = bill ? '\nดูบิล: ' + bill : '';
+  if (o.status === 'ลูกค้าสั่งแล้ว') return `สวัสดีครับ ออเดอร์ ${o.no} (${fmt(o.pieces)} ตัว) ยังรอมัดจำ ${fmt(o.deposit)} บาทอยู่นะครับ รอบนี้มีลายใหม่เข้ามา เดี๋ยวส่งรูปให้ดูครับ สนใจเพิ่มลายไหนไหมครับ?`;
+  if (o.status === 'ได้มัดจำแล้ว') return `ได้รับมัดจำ ${fmt(o.deposit)} บาทแล้วครับ ออเดอร์ ${o.no} จะผลิตเสร็จภายในวันที่ ${o.due} ครับ` + b;
+  if (o.status === 'ผลิตเสร็จ') return `ออเดอร์ ${o.no} ผลิตเสร็จแล้วครับ เดี๋ยวส่งคลิปของจริงให้ดูนะครับ ยอดที่เหลือ ${fmt(o.balance)} บาท (รวมค่าส่งแล้ว) ครับ` + b;
+  if (o.status === 'จ่ายครบแล้ว') return `ได้รับยอดครบแล้วครับ ขอบคุณมากครับ กำลังแพ็กส่งให้ ส่งแล้วจะแจ้งเลขพัสดุครับ` + b;
+  if (o.status === 'ส่งแล้ว') return `ส่งของแล้วครับ ${o.ship}${o.tracking ? ' เลขพัสดุ ' + o.tracking : ''} ครับ ของถึงแล้วรบกวนถ่ายคลิปตอนเปิดกล่องไว้ด้วยนะครับ` + b;
+  return '';
+}
+function msgAfter() { return 'ของขายเป็นยังไงบ้างครับ ทรงไหนออกดีสุดครับ? รอบนี้มีลายใหม่ ส่งรูปให้ดูได้เลยครับ'; }
+async function admCopy(id, btn) {
+  const txt = $(id).textContent;
+  try { await navigator.clipboard.writeText(txt); }
+  catch (e) { const ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (er) { } ta.remove(); }
+  btn.textContent = 'คัดลอกแล้ว ✓'; setTimeout(() => btn.textContent = 'คัดลอกข้อความ', 1600);
+}
+function admBack() { ADM.no = ''; renderAdmTabs(); loadAdmin(); }
+async function admOpen(no) {
+  ADM.no = no; admConfirm = ''; renderAdmTabs();
+  const box = $('admBody'); box.innerHTML = '<p class="muted" style="margin-top:16px">กำลังโหลด...</p>'; window.scrollTo(0, 0);
+  try { const res = await adm('order', { no: no }); admCache.order = res; renderOrder(res); } catch (e) { admErr(e); }
+}
+function renderOrder(res) {
+  const o = res.order, nx = NEXT[o.status], final = o.status === 'ยกเลิก' || o.status === 'ส่งแล้ว';
+  const m = msgFor(o, res.billUrl);
+  $('admBody').innerHTML = `<button class="back" style="padding-left:0" onclick="admBack()">‹ กลับ</button>
+    <div class="lbl">${esc(o.no)} · สั่ง ${esc(o.date)}</div><h2>${esc(o.shop)}</h2>
+    <p class="muted">${esc(o.lineName)} · โทร ${esc(o.phone)}<br>${esc(o.address)}<br>${esc(o.ship)}${o.zone ? ' · ' + (o.zone === 'กทม' ? 'กทม./ปริมณฑล' : 'ต่างจังหวัด') : ''}</p>
+    <p style="margin-top:8px"><span class="tier">${esc(o.status)}</span>${o.due ? ` <span class="muted">· กำหนดเสร็จ ${esc(o.due)}</span>` : ''}</p>
+    ${o.note ? `<div class="tagcard"><h4>หมายเหตุลูกค้า</h4><p>${esc(o.note)}</p></div>` : ''}
+    <div class="hr"></div>
+    ${res.lines.map(l => `<div class="sum"><div class="row"><span>${esc(l.styleName)} · ${esc(l.printName)} · ${esc(l.size)} × ${fmt(l.qty)}</span><b>${fmt(l.total)}</b></div></div>`).join('')}
+    <div class="sum" style="margin-top:8px">
+      <div class="row"><span>ค่าสินค้า</span><b>${fmt(o.subtotal)} บาท</b></div>
+      ${o.disc ? `<div class="row"><span>โค้ด ${esc(o.code)}</span><b>-${fmt(o.disc)}</b></div>` : ''}
+      <div class="row"><span>ค่าส่ง</span><b>${o.shipCost === 'แจ้งในแชท' ? 'ยังไม่ใส่' : fmt(o.shipCost) + ' บาท'}</b></div>
+      <div class="row"><span>มัดจำ 40%</span><b>${fmt(o.deposit)} บาท</b></div>
+      <div class="row tot"><span>ยอดที่เหลือ (รวมค่าส่ง)</span><b>${fmt(o.balance)} บาท</b></div></div>
+    ${!final ? `<div class="hr"></div><div class="lbl">ขั้นต่อไป</div>
+      ${nx ? `<button class="btn" onclick="admStatus('${nx}')">${admConfirm === nx ? 'กดอีกครั้งเพื่อยืนยัน' : '✓ ' + NEXT_LABEL[nx]}</button>` : ''}` : ''}
+    <div class="hr"></div><div class="lbl">ค่าส่งจริง / เลขพัสดุ</div>
+    <div class="row2"><input id="aShip" type="number" inputmode="numeric" placeholder="ค่าส่ง (บาท)" value="${o.shipCost === 'แจ้งในแชท' ? '' : esc(o.shipCost)}"><input id="aTrack" placeholder="เลขพัสดุ" value="${esc(o.tracking)}"></div>
+    <button class="btn ghost" style="margin-top:8px" onclick="admSave()">บันทึก</button><div id="aMsg"></div>
+    ${m ? `<div class="hr"></div><div class="lbl">ข้อความส่งลูกค้า</div><div class="msg" id="aText">${esc(m)}</div>
+      <button class="btn ghost" onclick="admCopy('aText', this)">คัดลอกข้อความ</button>` : ''}
+    ${o.status === 'ส่งแล้ว' ? `<div class="msg" id="aText2" style="margin-top:12px">${esc(msgAfter())}</div><button class="btn ghost" onclick="admCopy('aText2', this)">คัดลอกข้อความ</button>` : ''}
+    ${res.billUrl ? `<button class="btn ghost" style="margin-top:10px" onclick="openBill('${esc(res.billUrl)}')">เปิดบิล</button>` : ''}
+    ${!final ? `<div class="hr"></div><div class="lbl">ยกเลิกออเดอร์</div><input id="aReason" placeholder="เหตุผล เช่น ลูกค้าไม่โอนมัดจำ">
+      <button class="btn ghost" style="margin-top:8px;color:var(--red);border-color:var(--red)" onclick="admStatus('ยกเลิก')">${admConfirm === 'ยกเลิก' ? 'กดอีกครั้งเพื่อยืนยันยกเลิก' : 'ยกเลิกออเดอร์นี้'}</button>` : ''}
+    ${o.reason ? `<p class="muted" style="margin-top:10px">เหตุผลยกเลิก: ${esc(o.reason)}</p>` : ''}
+    <p class="muted" style="margin:16px 0">${o.by ? 'อัปเดตล่าสุด: ' + esc(o.by) : ''}</p>`;
+}
+async function admStatus(st) {
+  if (admConfirm !== st) { admConfirm = st; renderOrder(admCache.order); return; }
+  const reason = $('aReason') ? $('aReason').value : '';
+  try { const res = await adm('update', { no: ADM.no, status: st, reason: reason }); admConfirm = ''; admCache.order = res; renderOrder(res); }
+  catch (e) { admConfirm = ''; renderOrder(admCache.order); $('aMsg').innerHTML = `<p class="err">${esc(e.message)}</p>`; }
+}
+async function admSave() {
+  try { const res = await adm('update', { no: ADM.no, ship: $('aShip').value, tracking: $('aTrack').value }); admCache.order = res; renderOrder(res); $('aMsg').innerHTML = '<p class="ok">บันทึกแล้ว</p>'; }
+  catch (e) { $('aMsg').innerHTML = `<p class="err">${esc(e.message)}</p>`; }
+}
+
+
+async function start() {
+  try {
+    await liff.init({ liffId: LIFF_ID });
+    if (!liff.isLoggedIn()) { liff.login({ redirectUri: location.href }); return; }
+    ID = liff.getIDToken();
+    const res = await api({ action: 'admin', idToken: ID, op: 'today' });
+    if (!res.ok) {
+      const uid = (liff.getDecodedIDToken() || {}).sub || res.userId || '';
+      $('loadmsg').innerHTML = `<p class="err">${esc(res.error)}</p><p class="muted" style="margin-top:14px">ถ้าเป็นมาร์คหรือพ่อ ให้ก๊อปรหัสนี้ไปใส่ในชีต ตั้งค่า → ADMIN_USER_IDS</p>
+        <div class="msg" id="uid">${esc(uid)}</div><button class="btn ghost" onclick="admCopy('uid', this)">คัดลอกข้อความ</button>`;
+      return;
+    }
+    renderAdmTabs(); loadAdmin();
+    $('loader').classList.add('hide');
+  } catch (e) { $('loadmsg').innerHTML = `<p class="err">${esc(e.message || e)}</p>`; }
+}
+Object.assign(window, { openBill, admTab, admFilter, admOpen, admBack, admStatus, admSave, admCopy, admEditCode, admSaveCode, admToggleCode, admTogglePrint, loadAdmin });
+start();
+}
+</script>
+</body>
+</html>
